@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Информация о самосвалах</title>
+</head>
+<body>
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Применить">
+</form>
+
+{% if truck_model_selection %}
+
+    <table>
+        <thead>
+        <tr>
+            <th>Бортовой номер</th>
+            <th>Модель</th>
+            <th>Макс. грузоподъемность</th>
+            <th>Текущий вес</th>
+            <th>Перегруз, %</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for truck in trucks_list%}
+                <tr>
+                    <td>{{ truck }}</td>
+                    <td>{{ truck.truck_model.name }}</td>
+                    <td>{{ truck.truck_model.max_load_capacity }}</td>
+                    <td>{{ truck.weight_count }}</td>
+                    <td>{{ truck.overload_count_per }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endif %}
+
+</body>
+</html>
